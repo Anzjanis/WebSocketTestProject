@@ -1,0 +1,9 @@
+Created project using cucumber archetype
+
+Project will contain following dependencies:
+    * Cucumber: To be able to write test cases BDD style and test cases will be human readable format
+    * JUnit: Unit test framework
+    * Guice: Used for dependency injection, allows to share test information between classes and keep test context.
+        Make tests easier to run in parallel
+    * Jackson: Used for serializing/deserializing json files into dto/models
+    * Java-WebSocket: Web socket client

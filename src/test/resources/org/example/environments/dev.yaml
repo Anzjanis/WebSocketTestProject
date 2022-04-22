@@ -1,0 +1,5 @@
+url: ws.kraken.com
+schema: wss
+port: 8888
+username: Gundars
+password: someValuesInhere

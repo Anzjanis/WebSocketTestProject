@@ -94,4 +94,5 @@ public class WebSocketSteps {
         Assertions.assertEquals(testContext.getSentPingPongMessage().getReqid(), response.getReqid(), "Request ID is not as expected");
     }
 
+
 }

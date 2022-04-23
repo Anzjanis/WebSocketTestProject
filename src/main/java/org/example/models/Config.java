@@ -2,7 +2,7 @@ package org.example.models;
 
 public class Config {
     private String url;
-    private int reconnectFrequency;
+    private int reconnectTimeAmount;
     private int retryAmount;
 
     public int getRetryAmount() {
@@ -20,11 +20,11 @@ public class Config {
     public void setUrl(String url) {
         this.url = url;
     }
-    public int getReconnectFrequency() {
-        return reconnectFrequency;
+    public int getReconnectTimeAmount() {
+        return reconnectTimeAmount;
     }
 
-    public void setReconnectFrequency(int reconnectFrequency) {
-        this.reconnectFrequency = reconnectFrequency;
+    public void setReconnectTimeAmount(int reconnectTimeAmount) {
+        this.reconnectTimeAmount = reconnectTimeAmount;
     }
 }

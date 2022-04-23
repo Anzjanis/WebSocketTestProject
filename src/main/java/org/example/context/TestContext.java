@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 
 public class TestContext {
@@ -37,6 +37,13 @@ public class TestContext {
     public WebSocketKrClient getClient() {
         if (client == null) {
             Assertions.fail("WebSocket client haven't started. Use method - Given(web socket client connection is created), before calling client");
+        }
+        if(client.isClosed() || client.isClosing()) {
+            try {
+                client.connectBlocking(config.getReconnectTimeAmount(), TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         return client;
     }

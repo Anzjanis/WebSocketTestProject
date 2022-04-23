@@ -1,5 +1,7 @@
 Created project using cucumber archetype
 
+Biggest mistake: using java for this project
+
 Project will contain following dependencies:
     * Cucumber: To be able to write test cases BDD style and test cases will be human readable format
     * JUnit: Unit test framework

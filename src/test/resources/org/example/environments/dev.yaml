@@ -1,3 +1,3 @@
 url: wss://ws.kraken.com
 reconnectTimeAmount: 5000
-retryAmount: 100
+retryAmount: 300

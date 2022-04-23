@@ -10,7 +10,15 @@ public class Subscription {
     private Boolean ratecounter;
     private Boolean snapshot;
 
+    private Integer maxratecount;
 
+    public Integer getMaxratecount() {
+        return maxratecount;
+    }
+
+    public void setMaxratecount(Integer maxratecount) {
+        this.maxratecount = maxratecount;
+    }
 
     public Integer getDepth() {
         return depth;

@@ -2,14 +2,21 @@ package org.example.context;
 
 
 import io.cucumber.java.Scenario;
+import io.cucumber.java.it.Ma;
 import org.example.config.ConfigReader;
 import org.example.models.Config;
 import org.example.models.PingPong;
+import org.example.models.subscriber.Subscribe;
+import org.example.models.subscriber.SubscriptionStatus;
+import org.example.models.subscriber.spread.SpreadPayload;
+import org.example.models.subscriber.ticker.TickerPayload;
 import org.example.sockets.WebSocketKrClient;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -19,8 +26,28 @@ public class TestContext {
     private Config config;
     private WebSocketKrClient client;
     private PingPong sentPingPongMessage;
+    private  Map<Integer, Subscribe> sentSubscriptions = new HashMap<>();
+    private List<SubscriptionStatus>receivedSubscriptionConfirmation = new ArrayList<>();
+    private List<String> responseArray = new ArrayList<>();
 
-    List<String> responseArray = new ArrayList<>();
+    private List<TickerPayload> tickerUpdates = new ArrayList<>();
+    private List<SpreadPayload> spreadUpdates = new ArrayList<>();
+
+    public List<SpreadPayload> getSpreadUpdates() {
+        return spreadUpdates;
+    }
+
+    public List<TickerPayload> getTickerUpdates() {
+        return tickerUpdates;
+    }
+
+    public Map<Integer, Subscribe> getSentSubscriptions() {
+        return sentSubscriptions;
+    }
+
+    public List<SubscriptionStatus> getReceivedSubscriptionConfirmation() {
+        return receivedSubscriptionConfirmation;
+    }
 
     public List<String> getResponseArray() {
         return responseArray;

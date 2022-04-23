@@ -1,6 +1,9 @@
 package org.example.sockets;
 
+import io.cucumber.java.eo.Se;
 import org.example.context.TestContext;
+import org.example.helpers.Serializer;
+import org.example.models.subscriber.SubscriptionStatus;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.junit.jupiter.api.Assertions;
@@ -16,8 +19,9 @@ public class WebSocketKrClient extends WebSocketClient {
     public WebSocketKrClient(TestContext testContext) throws URISyntaxException {
         super(new URI(testContext.getConfig().getUrl()));
         this.testContext = testContext;
+        webSocketLogic = new WebSocketLogic(testContext);
     }
-
+    WebSocketLogic webSocketLogic;
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
         testContext.getScenario().log("WS Connection started");
@@ -25,8 +29,13 @@ public class WebSocketKrClient extends WebSocketClient {
 
     @Override
     public void onMessage(String s) {
-        testContext.getResponseArray().add(s);
-        testContext.getScenario().log("Received message: " + s);
+//        ATM no need to log it.
+        if(!s.contains("heartbeat")) {
+            webSocketLogic.divideTraffic(s);
+
+            testContext.getScenario().log("Received message: " + s);
+        }
+
     }
 
     @Override
@@ -42,6 +51,9 @@ public class WebSocketKrClient extends WebSocketClient {
     @Override
     public void send(String e) {
         super.send(e);
-        testContext.getScenario().log("Received message: " + e);
+        testContext.getScenario().log("Sent message: " + e);
     }
+
+//    move messages into correct places
+
 }

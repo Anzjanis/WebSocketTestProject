@@ -1,28 +1,21 @@
 package org.example.steps;
 
 
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.context.TestContext;
-import io.cucumber.java.Scenario;
-import io.cucumber.java.en.Given;
 import org.example.helpers.Serializer;
 import org.example.helpers.TestDataGen;
 import org.example.models.PingPong;
 import org.example.sockets.WebSocketKrClient;
 import org.example.sockets.WebSocketLogic;
-import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.enums.ReadyState;
 import org.junit.jupiter.api.Assertions;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.util.concurrent.CompletableFuture;
 
 
 public class WebSocketSteps {
@@ -38,11 +31,6 @@ public class WebSocketSteps {
     private WebSocketKrClient client;
     private Serializer serializer = new Serializer();
     private WebSocketLogic webSocketLogic;
-
-    @Given("I can ping service")
-    public void iCanPingService() {
-
-    }
 
     @Given("web socket client connection is created")
     public void webSocketClientConnectionIsCreated() {
@@ -86,13 +74,11 @@ public class WebSocketSteps {
     @Then("I receive pong response")
     public void iReceivePongResponse() throws IOException, InterruptedException {
 
-        int newMessageIndex = webSocketLogic.waitForForMessage(1);
+        int newMessageIndex = webSocketLogic.waitForForMessage(1, testContext.getResponseArray());
         Assertions.assertNotEquals(0, newMessageIndex, "There is no new messages");
         PingPong response = serializer.deserializeJson(testContext.getResponseArray().get(newMessageIndex), PingPong.class);
 
         Assertions.assertEquals("pong", response.getEvent());
         Assertions.assertEquals(testContext.getSentPingPongMessage().getReqid(), response.getReqid(), "Request ID is not as expected");
     }
-
-
 }

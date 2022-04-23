@@ -7,6 +7,7 @@ import org.example.helpers.TestDataGen;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Subscribe {
@@ -47,11 +48,10 @@ public class Subscribe {
         this.subscription = subscription;
     }
 
-    public Subscribe buildSubscribeModel(DataTable dataTable) {
-        var map = dataTable.entries().get(0);
+    public Subscribe buildSubscribeModel(Map<String, String> map) {
+
 
         Subscribe subscribe = new Subscribe();
-        var x = map.get("interval");
         Subscription subscription = new Subscription();
         subscribe.subscription = subscription;
         subscribe.reqid = TestDataGen.generateInteger(map.get("reqid"), 5);

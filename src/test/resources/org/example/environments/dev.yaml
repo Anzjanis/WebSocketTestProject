@@ -1,5 +1,3 @@
-url: ws.kraken.com
-schema: wss
-port: 8888
-username: Gundars
-password: someValuesInhere
+url: wss://ws.kraken.com
+reconnectFrequency: 5000
+retryAmount: 100

@@ -1,9 +1,12 @@
 package org.example.helpers;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import io.cucumber.java.Scenario;
 import org.example.models.Config;
@@ -20,6 +23,9 @@ public class Serializer {
 
     private void setUpObjectMappers() {
         mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, false);
         yamlMapper = new ObjectMapper(new YAMLFactory());
     }
 
@@ -29,7 +35,6 @@ public class Serializer {
 
     public <T> T deserializeJson(String json, Class<T> target) {
 
-        Object object = null;
         try {
             return mapper.readValue(json, target);
         } catch (JsonProcessingException ex) {

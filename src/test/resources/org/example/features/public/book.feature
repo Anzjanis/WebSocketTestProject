@@ -3,4 +3,5 @@ Feature: First Test
 
   @TestTag
   Scenario: Lets test this
-    Given I can ping service
+    Given web socket client connection is created
+    Then web socket client state should be "OPEN"

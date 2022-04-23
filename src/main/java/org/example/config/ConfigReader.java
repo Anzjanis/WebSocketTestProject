@@ -7,13 +7,12 @@ import java.io.File;
 
 public class ConfigReader {
 
-    String environmentInUse = System.getProperty("env", "dev");
+    static String environmentInUse = System.getProperty("env", "dev");
 //
-    public Config getConfig() {
+    public static Config getConfig() {
         Serializer serializer = new Serializer();
         File yaml = new File("src/test/resources/org/example/environments/"+environmentInUse+".yaml");
-        Config o = serializer.deserializeYaml(yaml, Config.class);
 
-        return o;
+        return serializer.deserializeYaml(yaml, Config.class);
     }
 }

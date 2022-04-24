@@ -40,7 +40,6 @@ public class WebSocketKrClient extends WebSocketClient {
 
     @Override
     public void onClose(int i, String s, boolean b) {
-       testContext.getScenario().log("WS Connection closed");
     }
 
     @Override

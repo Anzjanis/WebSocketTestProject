@@ -4,6 +4,7 @@ import io.cucumber.java.eo.Se;
 import org.example.context.TestContext;
 import org.example.helpers.Serializer;
 import org.example.models.subscriber.SubscriptionStatus;
+import org.example.models.subscriber.Trade.TradePayload;
 import org.example.models.subscriber.spread.SpreadPayload;
 import org.example.models.subscriber.ticker.TickerPayload;
 import org.java_websocket.client.WebSocketClient;
@@ -56,13 +57,14 @@ public class WebSocketLogic {
         return false;
     }
 
+    // not the best, but will help to divide messages
     public void divideTraffic(String s) {
         testContext.getResponseArray().add(s);
         if(s.contains("\"event\":\"subscriptionStatus\"")) {
             var ss = serializer.deserializeJson(s, SubscriptionStatus.class);
             testContext.getReceivedSubscriptionConfirmation().add(ss);
         }
-        // not the best, but will help to divide messages
+
         if(s.contains("\"o\":[") && s.contains("\"a\":[") && s.contains("\"b\":[") && s.contains("\"c\":[")) {
             var ticker = serializer.deserializeJson(s, ArrayList.class);
             TickerPayload tickerPayload = new TickerPayload().buildTickerModel(ticker);
@@ -75,6 +77,13 @@ public class WebSocketLogic {
             SpreadPayload spreadPayload = new SpreadPayload().buildSpreadModel(spread);
 
             testContext.getSpreadUpdates().add(spreadPayload);
+        }
+
+        if(s.contains("\"trade\"") && s.contains("\"]") && s.contains("[") ) {
+            var trade = serializer.deserializeJson(s, ArrayList.class);
+            TradePayload tradePayload = new TradePayload().buildTradeModel(trade);
+
+            testContext.getTradeUpdates().add(tradePayload);
         }
     }
 }

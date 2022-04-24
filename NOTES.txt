@@ -2,6 +2,8 @@ Created project using cucumber archetype
 
 Biggest mistake: using java for this project
 
+Sometimes there is quite slow update feed for subscriptions. DEV.yaml retry amount can be increased to achieve longer querying period
+
 Project will contain following dependencies:
     * Cucumber: To be able to write test cases BDD style and test cases will be human readable format
     * JUnit: Unit test framework

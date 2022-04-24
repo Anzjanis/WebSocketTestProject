@@ -61,8 +61,8 @@ public class Subscribe {
 
         subscription.setInterval(((map.get("interval")).equals("null")) ? null : (Integer.valueOf(map.get("interval"))));
         subscription.setName(map.get("name"));
-        subscription.setRatecounter(((map.get("ratecounter")).equals("null")) ? null : (Boolean.valueOf(map.get("ratecounter"))));
-        subscription.setSnapshot(((map.get("snapshot")).equals("null"))? null : (Boolean.valueOf(map.get("snapshot"))));
+        subscription.setRatecounter(((map.get("ratecounter")) == null || (map.get("ratecounter")).equals("null")) ? null : (Boolean.valueOf(map.get("ratecounter"))));
+        subscription.setSnapshot(((map.get("snapshot")) == null || (map.get("snapshot")).equals("null")) ? null : (Boolean.valueOf(map.get("snapshot"))));
 
         return subscribe;
     }

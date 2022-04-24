@@ -8,6 +8,7 @@ import org.example.models.Config;
 import org.example.models.PingPong;
 import org.example.models.subscriber.Subscribe;
 import org.example.models.subscriber.SubscriptionStatus;
+import org.example.models.subscriber.Trade.TradePayload;
 import org.example.models.subscriber.spread.SpreadPayload;
 import org.example.models.subscriber.ticker.TickerPayload;
 import org.example.sockets.WebSocketKrClient;
@@ -32,6 +33,12 @@ public class TestContext {
 
     private List<TickerPayload> tickerUpdates = new ArrayList<>();
     private List<SpreadPayload> spreadUpdates = new ArrayList<>();
+
+    private List<TradePayload> tradeUpdates = new ArrayList<>();
+
+    public List<TradePayload> getTradeUpdates() {
+        return tradeUpdates;
+    }
 
     public List<SpreadPayload> getSpreadUpdates() {
         return spreadUpdates;

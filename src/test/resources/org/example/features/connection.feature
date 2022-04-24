@@ -1,4 +1,4 @@
-@Smoke
+@Smoke @All
 Feature: Quick smoke test to check if it is possible to open connection and close it
 
   Scenario: After WS client is disconnected it should starting changing states from Open->Closing->Closed

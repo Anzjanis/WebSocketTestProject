@@ -39,10 +39,10 @@ TestContext for future reference
 
 ## To run tests using docker:
     * To run tests on docker:
-        Build image - docker build -t app:latest .
-        Start docker image - docker run -it --name samplecontainer app:latest /bin/bash
-        Start test execution -mvn -f /home/app/pom.xml clean test -Dtest=RunCucumberParallelTest -Denv=dev
-    * Reports available: cd /home/app/target/testReports
+        1. Build image: docker build -t app:latest .
+        2. Start docker image: docker run -it --name samplecontainer app:latest /bin/bash
+        3. Start test execution: mvn -f /home/app/pom.xml clean test -Dtest=RunCucumberParallelTest -Denv=dev
+    * Reports available: cd target/testReports
 
 
     

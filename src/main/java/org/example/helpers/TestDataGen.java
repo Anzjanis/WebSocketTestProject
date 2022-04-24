@@ -6,7 +6,7 @@ public class TestDataGen {
 
     public static int generateInteger(String value, int length) {
 
-        if(value.contains("random")) {
+        if (value.contains("random")) {
             char[] chars = "0123456789".toCharArray();
             Random rnd = new Random();
             StringBuilder sb = new StringBuilder();

@@ -2,7 +2,6 @@ package org.example.context;
 
 
 import io.cucumber.java.Scenario;
-import io.cucumber.java.it.Ma;
 import org.example.config.ConfigReader;
 import org.example.models.Config;
 import org.example.models.PingPong;
@@ -27,14 +26,14 @@ public class TestContext {
     private Config config;
     private WebSocketKrClient client;
     private PingPong sentPingPongMessage;
-    private  Map<Integer, Subscribe> sentSubscriptions = new HashMap<>();
-    private List<SubscriptionStatus>receivedSubscriptionConfirmation = new ArrayList<>();
-    private List<String> responseArray = new ArrayList<>();
+    private final Map<Integer, Subscribe> sentSubscriptions = new HashMap<>();
+    private final List<SubscriptionStatus> receivedSubscriptionConfirmation = new ArrayList<>();
+    private final List<String> responseArray = new ArrayList<>();
 
-    private List<TickerPayload> tickerUpdates = new ArrayList<>();
-    private List<SpreadPayload> spreadUpdates = new ArrayList<>();
+    private final List<TickerPayload> tickerUpdates = new ArrayList<>();
+    private final List<SpreadPayload> spreadUpdates = new ArrayList<>();
 
-    private List<TradePayload> tradeUpdates = new ArrayList<>();
+    private final List<TradePayload> tradeUpdates = new ArrayList<>();
 
     public List<TradePayload> getTradeUpdates() {
         return tradeUpdates;
@@ -72,7 +71,7 @@ public class TestContext {
         if (client == null) {
             Assertions.fail("WebSocket client haven't started. Use method - Given(web socket client connection is created), before calling client");
         }
-        if(client.isClosed() || client.isClosing()) {
+        if (client.isClosed() || client.isClosing()) {
             try {
                 client.connectBlocking(config.getReconnectTimeAmount(), TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {

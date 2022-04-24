@@ -1,7 +1,6 @@
 package org.example.steps;
 
 
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,17 +19,16 @@ import java.net.URISyntaxException;
 
 public class WebSocketSteps {
 
+    private final TestContext testContext;
+
+    private WebSocketKrClient client;
+    private final Serializer serializer = new Serializer();
+    private final WebSocketLogic webSocketLogic;
+
     public WebSocketSteps(TestContext testContext) {
         this.testContext = testContext;
-        scenario = testContext.getScenario();
         webSocketLogic = new WebSocketLogic(testContext);
     }
-
-    private TestContext testContext;
-    private Scenario scenario;
-    private WebSocketKrClient client;
-    private Serializer serializer = new Serializer();
-    private WebSocketLogic webSocketLogic;
 
     @Given("web socket client connection is created")
     public void webSocketClientConnectionIsCreated() {
@@ -72,7 +70,7 @@ public class WebSocketSteps {
     }
 
     @Then("I receive pong response")
-    public void iReceivePongResponse() throws IOException, InterruptedException {
+    public void iReceivePongResponse() {
 
         int newMessageIndex = webSocketLogic.waitForForMessage(1, testContext.getResponseArray());
         Assertions.assertNotEquals(0, newMessageIndex, "There is no new messages");

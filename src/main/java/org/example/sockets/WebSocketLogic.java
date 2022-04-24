@@ -27,7 +27,7 @@ public class WebSocketLogic {
         int size = array.size();
         for (int i = 0; i < testContext.getConfig().getRetryAmount(); i++) {
             if (size + expectedAmountOfNewMessages <= array.size()) {
-                return array.size()-1;
+                return array.size() - 1;
             }
 
             try {
@@ -57,26 +57,26 @@ public class WebSocketLogic {
     // not the best, but will help to divide messages
     public void sortTraffic(String s) {
         testContext.getResponseArray().add(s);
-        if(s.contains("\"event\":\"subscriptionStatus\"")) {
+        if (s.contains("\"event\":\"subscriptionStatus\"")) {
             var ss = serializer.deserializeJson(s, SubscriptionStatus.class);
             testContext.getReceivedSubscriptionConfirmation().add(ss);
         }
 
-        if(s.contains("ticker") && s.contains("\"]") && s.contains("[")) {
+        if (s.contains("ticker") && s.contains("\"]") && s.contains("[")) {
             var ticker = serializer.deserializeJson(s, ArrayList.class);
             TickerPayload tickerPayload = new TickerPayload().buildTickerModel(ticker);
 
             testContext.getTickerUpdates().add(tickerPayload);
         }
 
-        if(s.contains("spread") && s.contains("\"]") && s.contains("[") ) {
+        if (s.contains("spread") && s.contains("\"]") && s.contains("[")) {
             var spread = serializer.deserializeJson(s, ArrayList.class);
             SpreadPayload spreadPayload = new SpreadPayload().buildSpreadModel(spread);
 
             testContext.getSpreadUpdates().add(spreadPayload);
         }
 
-        if(s.contains("trade") && s.contains("\"]") && s.contains("[") ) {
+        if (s.contains("trade") && s.contains("\"]") && s.contains("[")) {
             var trade = serializer.deserializeJson(s, ArrayList.class);
             TradePayload tradePayload = new TradePayload().buildTradeModel(trade);
 

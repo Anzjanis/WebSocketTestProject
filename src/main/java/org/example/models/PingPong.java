@@ -2,8 +2,11 @@ package org.example.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include. NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PingPong {
+    private String event;
+    private Integer reqid;
+
     public PingPong() {
     }
 
@@ -15,11 +18,6 @@ public class PingPong {
         this.event = event;
         this.reqid = reqid;
     }
-
-    private String event;
-
-    private Integer reqid;
-
 
     public String getEvent() {
         return event;

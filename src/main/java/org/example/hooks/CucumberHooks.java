@@ -5,8 +5,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.example.context.TestContext;
-import org.example.helpers.Serializer;
-import org.example.models.Config;
 import org.example.sockets.WebSocketLogic;
 import org.java_websocket.enums.ReadyState;
 
@@ -14,13 +12,12 @@ import org.java_websocket.enums.ReadyState;
 public class CucumberHooks {
     TestContext testContext;
     Scenario scenario;
-
+    private final WebSocketLogic webSocketLogic;
 
     public CucumberHooks(TestContext testContext) {
         this.testContext = testContext;
         webSocketLogic = new WebSocketLogic(testContext);
     }
-    private WebSocketLogic webSocketLogic;
 
     @Before
     public void before(Scenario scenario) {
@@ -33,7 +30,7 @@ public class CucumberHooks {
         var client = testContext.getClient();
 
         try {
-            if(client.isOpen()) {
+            if (client.isOpen()) {
                 client.close();
                 webSocketLogic.waitForClientStateChange(ReadyState.CLOSED, client);
             }

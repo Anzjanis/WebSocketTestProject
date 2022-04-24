@@ -3,7 +3,6 @@ package org.example.steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.example.context.TestContext;
-import org.example.helpers.Serializer;
 import org.example.sockets.WebSocketKrClient;
 import org.example.sockets.WebSocketLogic;
 import org.junit.jupiter.api.Assertions;
@@ -12,17 +11,14 @@ import java.math.BigDecimal;
 
 public class SpreadSteps {
     TestContext testContext;
-    Serializer serializer = new Serializer();
+    WebSocketKrClient client;
+    WebSocketLogic webSocketLogic;
 
     public SpreadSteps(TestContext testContext) {
         this.testContext = testContext;
         client = testContext.getClient();
         webSocketLogic = new WebSocketLogic(testContext);
     }
-
-    WebSocketKrClient client;
-    WebSocketLogic webSocketLogic;
-
 
     @Then("I expect to receive at least {int} updates about my spread subscription")
     public void iExpectToReceiveAtLeastUpdatesAboutMySpreadSubscription(int arg0) {
@@ -57,7 +53,7 @@ public class SpreadSteps {
     @And("I check following information in spread: timestamp is increasing for each entry")
     public void iCheckFollowingInformationInSpreadTimestampIsIncreasingForEachEntry() {
         for (int i = 1; i < testContext.getSpreadUpdates().size(); i++) {
-            var spread0 = testContext.getSpreadUpdates().get(i-1);
+            var spread0 = testContext.getSpreadUpdates().get(i - 1);
             var timestamp0 = spread0.getSpreadInfoList().get(2);
 
             var spread1 = testContext.getSpreadUpdates().get(i);

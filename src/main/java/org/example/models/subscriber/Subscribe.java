@@ -1,10 +1,8 @@
 package org.example.models.subscriber;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.cucumber.datatable.DataTable;
 import org.example.helpers.TestDataGen;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

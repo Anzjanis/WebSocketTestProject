@@ -10,13 +10,14 @@ import java.net.URISyntaxException;
 public class WebSocketKrClient extends WebSocketClient {
 
     TestContext testContext;
+    WebSocketLogic webSocketLogic;
 
     public WebSocketKrClient(TestContext testContext) throws URISyntaxException {
         super(new URI(testContext.getConfig().getUrl()));
         this.testContext = testContext;
         webSocketLogic = new WebSocketLogic(testContext);
     }
-    WebSocketLogic webSocketLogic;
+
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
         testContext.getScenario().log("WS Connection started");
@@ -24,13 +25,12 @@ public class WebSocketKrClient extends WebSocketClient {
 
     @Override
     public void onMessage(String s) {
-//        ATM no need to log it.
-        if(!s.contains("heartbeat")) {
+//        Currently not logging heartbeat messages
+        if (!s.contains("heartbeat")) {
             webSocketLogic.sortTraffic(s);
 
             testContext.getScenario().log("Received message: " + s);
         }
-
     }
 
     @Override
@@ -39,7 +39,6 @@ public class WebSocketKrClient extends WebSocketClient {
 
     @Override
     public void onError(Exception e) {
-
     }
 
     @Override
@@ -47,7 +46,5 @@ public class WebSocketKrClient extends WebSocketClient {
         super.send(e);
         testContext.getScenario().log("Sent message: " + e);
     }
-
-//    move messages into correct places
 
 }

@@ -1,21 +1,18 @@
 package org.example.helpers;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import io.cucumber.java.Scenario;
-import org.example.models.Config;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.File;
 import java.io.IOException;
 
 public class Serializer {
+
+    ObjectMapper mapper;
+    ObjectMapper yamlMapper;
 
     public Serializer() {
         setUpObjectMappers();
@@ -28,10 +25,6 @@ public class Serializer {
         mapper.configure(DeserializationFeature.FAIL_ON_NULL_CREATOR_PROPERTIES, false);
         yamlMapper = new ObjectMapper(new YAMLFactory());
     }
-
-    Scenario scenario;
-    ObjectMapper mapper;
-    ObjectMapper yamlMapper;
 
     public <T> T deserializeJson(String json, Class<T> target) {
 

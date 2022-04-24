@@ -2,7 +2,7 @@ package org.example.models.subscriber;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonInclude(JsonInclude.Include. NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Subscription {
     private Integer depth;
     private Integer interval;

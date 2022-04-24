@@ -20,6 +20,7 @@ public class Config {
     public void setUrl(String url) {
         this.url = url;
     }
+
     public int getReconnectTimeAmount() {
         return reconnectTimeAmount;
     }

@@ -1,9 +1,6 @@
 package org.example.models.subscriber.Trade;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class TradePayload {
     private Integer channelID;
@@ -47,7 +44,7 @@ public class TradePayload {
     public TradePayload buildTradeModel(ArrayList<?> arrayList) {
         TradePayload tradePayload = new TradePayload();
         tradePayload.channelID = Integer.valueOf(arrayList.get(0).toString());
-        tradePayload.tickerInfoMap = (ArrayList<ArrayList<String>>)arrayList.get(1);
+        tradePayload.tickerInfoMap = (ArrayList<ArrayList<String>>) arrayList.get(1);
         tradePayload.channelName = arrayList.get(2).toString();
         tradePayload.pair = arrayList.get(3).toString();
 

@@ -1,16 +1,11 @@
 package org.example.sockets;
 
-import io.cucumber.java.eo.Se;
 import org.example.context.TestContext;
-import org.example.helpers.Serializer;
-import org.example.models.subscriber.SubscriptionStatus;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-import org.junit.jupiter.api.Assertions;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.concurrent.CompletableFuture;
 
 public class WebSocketKrClient extends WebSocketClient {
 
@@ -31,7 +26,7 @@ public class WebSocketKrClient extends WebSocketClient {
     public void onMessage(String s) {
 //        ATM no need to log it.
         if(!s.contains("heartbeat")) {
-            webSocketLogic.divideTraffic(s);
+            webSocketLogic.sortTraffic(s);
 
             testContext.getScenario().log("Received message: " + s);
         }

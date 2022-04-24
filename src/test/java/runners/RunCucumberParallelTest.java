@@ -10,7 +10,7 @@ import org.junit.platform.suite.api.*;
 @ConfigurationParameter(key = Constants.PLUGIN_PROPERTY_NAME, value = "pretty, html:target/testReports/report.html")
 
 @ConfigurationParameter(key = Constants.PARALLEL_EXECUTION_ENABLED_PROPERTY_NAME, value = "true")
-@IncludeTags("All")
+@IncludeTags("Dev")
 
 public class RunCucumberParallelTest {
 }

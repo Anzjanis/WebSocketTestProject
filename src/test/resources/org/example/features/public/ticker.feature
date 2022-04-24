@@ -1,4 +1,4 @@
-@Ticker @All
+@Ticker @All @Dev
 Feature: Ticker functionality testing
 
 
